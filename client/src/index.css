@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-tajawal: var(--font-family-arabic);
+  --font-michroma: var(--font-family-english);
+
+  --color-orange-50: hsl(37.5 92.3% 94.9%);
+  --color-orange-100: hsl(35.5 96.1% 90%);
+  --color-orange-200: hsl(36.1 96.1% 80%);
+  --color-orange-300: hsl(35.9 96.1% 70%);
+  --color-orange-400: hsl(36.1 96.1% 60%);
+  --color-orange-500: hsl(36 96.1% 50%);
+  --color-orange-600: hsl(36.1 96.1% 40%);
+  --color-orange-700: hsl(35.9 96.1% 30%);
+  --color-orange-800: hsl(36.1 96.1% 20%);
+  --color-orange-900: hsl(35.5 96.1% 10%);
+  --color-orange-950: hsl(35.3 94.4% 7.1%);
+
+  --color-background: var(--color-orange-50);
+  --color-foreground: var(--color-orange-900);
+  --color-card: var(--color-orange-100);
+  --color-card-foreground: var(--color-orange-700);
+  --color-popover: var(--color-orange-50);
+  --color-popover-foreground: var(--color-orange-900);
+  --color-primary: var(--color-orange-900);
+  --color-primary-foreground: var(--color-orange-500);
+  --color-secondary: var(--color-orange-700);
+  --color-secondary-foreground: var(--color-orange-500);
+  --color-muted: var(--color-orange-300);
+  --color-muted-foreground: var(--color-orange-700);
+  --color-accent: var(--color-orange-600);
+  --color-accent-foreground: var(--color-orange-500);
+  --color-destructive: var(--color-orange-900);
+  --color-border: var(--color-orange-300);
+  --color-input: var(--color-orange-300);
+  --color-ring: var(--color-orange-400);
+  --color-chart-1: var(--color-orange-100);
+  --color-chart-2: var(--color-orange-200);
+  --color-chart-3: var(--color-orange-300);
+  --color-chart-4: var(--color-orange-400);
+  --color-chart-5: var(--color-orange-500);
+  --color-sidebar: var(--color-orange-600);
+  --color-sidebar-foreground: var(--font-color-secondary);
+  --color-sidebar-primary: var(--font-color-primary);
+  --color-sidebar-primary-foreground: var(--font-color-primary);
+  --color-sidebar-accent: var(--color-accent);
+  --color-sidebar-accent-foreground: var(--color-accent);
+  --color-sidebar-border: var(--color-border);
+  --color-sidebar-ring: var(--color-ring);
+
+  --radius-sm: calc(var(--border-radius-base) - 4px);
+  --radius-md: calc(var(--border-radius-md) - 2px);
+  --radius-lg: var(--border-radius-lg);
+  --radius-xl: calc(var(--border-radius-lg) + 4px);
+}
+
+:root {
+  /* Typography Colors */
+  --font-color-primary: var(--color-orange-900);
+  --font-color-secondary: var(--color-orange-700);
+  
+
+  /* Typography */
+  --font-size-base: 1.25rem;
+  --font-size-sm: 1rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2rem;
+  --font-size-2xl: 2.4rem;
+  --font-size-3xl: 3rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-family-arabic: 'tajawal';
+  --font-family-english: 'michroma';
+  /* border radius */
+  --border-radius-base: 0.5rem;
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.75rem;
+  --border-radius-lg: 1rem;
+  --border-radius-full: 9999px;
+}
+
+
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
