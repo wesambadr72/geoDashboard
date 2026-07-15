@@ -65,6 +65,7 @@ export type Country = {
     url_png: string;
     url_svg: string;
     description: string;
+    
   };
 
   // Identity & Culture

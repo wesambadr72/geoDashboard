@@ -4,25 +4,57 @@ import { logger } from 'hono/logger'
 import type { Country, CountryResponse } from "shared/src/index";
 import { TOP_COUNTRY_CODES } from "shared/src/index";
 
+import * as fs from "node:fs";
+import * as path from "node:path";
+
 const app = new Hono();
 
-// نظام كاش بسيط في الذاكرة (In-memory cache)
-const cache = new Map<string, { data: any; expiry: number }>();
+// نظام كاش بسيط يعتمد على ملف JSON محلي لحفظ البيانات عند إعادة تشغيل السيرفر
+const CACHE_FILE = path.join(process.cwd(), "cache.json");
 const CACHE_TTL = 3 * 24 * 60 * 60 * 1000; // 3 أيام
 
+function loadCache(): Record<string, { data: any; expiry: number }> {
+	try {
+		if (fs.existsSync(CACHE_FILE)) {
+			const rawData = fs.readFileSync(CACHE_FILE, "utf-8");
+			return JSON.parse(rawData);
+		}
+	} catch (error) {
+		console.error("Error loading cache file:", error);
+	}
+	return {};
+}
+
+function saveCache(cacheData: Record<string, { data: any; expiry: number }>) {
+	try {
+		fs.writeFileSync(CACHE_FILE, JSON.stringify(cacheData, null, 2), "utf-8");
+	} catch (error) {
+		console.error("Error saving cache file:", error);
+	}
+}
+
+// تحميل الكاش المخزن سابقاً عند بدء تشغيل السيرفر
+const cache = loadCache();
+
 function getFromCache(key: string) {
-	const item = cache.get(key);
+	const item = cache[key];
 	if (item && item.expiry > Date.now()) {
 		return item.data;
+	}
+	// إذا انتهت صلاحية الكاش، نقوم بحذفه وحفظ الحالة الجديدة
+	if (item) {
+		delete cache[key];
+		saveCache(cache);
 	}
 	return null;
 }
 
 function setToCache(key: string, data: any) {
-	cache.set(key, {
+	cache[key] = {
 		data,
 		expiry: Date.now() + CACHE_TTL
-	});
+	};
+	saveCache(cache);
 }
 
 app.use(cors());
