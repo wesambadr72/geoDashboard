@@ -34,7 +34,7 @@ function CountrySidebar({onSelectCountry}:CountrySidebarProps) {
   );
 
   return (
-    <aside className="w-80 h-[calc(100vh-64px)] border-r border-border bg-card flex flex-col font-tajawal">
+    <aside className="w-auto md:w-[30dvw] h-[calc(100vh-64px)] md:h-[102em] border border-border bg-card flex flex-col font-tajawal rounded-2xl">
       {/* Search Input Section */}
       <div className="p-4 border-b border-border space-y-2">
         <label className="text-sm font-semibold text-primary font-michroma">SEARCH COUNTRIES</label>
@@ -48,7 +48,7 @@ function CountrySidebar({onSelectCountry}:CountrySidebarProps) {
       </div>
 
       {/* Countries List */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-2">
+      <div className="flex-1 overflow-y-auto p-4 space-y-2 customScrollbar">
         {loading ? (
           // Loading Skeletons
           Array.from({ length: 8 }).map((_, index) => (
@@ -61,7 +61,7 @@ function CountrySidebar({onSelectCountry}:CountrySidebarProps) {
           filteredCountries.map((country) => (
             <button
               key={country.codes.alpha_2}
-              className="w-full flex items-center gap-3 p-3 rounded-xl border border-border bg-background hover:bg-orange-200/40 hover:border-orange-300 transition-all duration-200 cursor-pointer text-right group"
+              className="w-full flex items-center gap-3 p-3 rounded-xl border border-border bg-background hover:bg-amber-50/40 hover:border-orange-300 active:bg-orange-300/20 transition-all duration-200 cursor-pointer text-right group"
               onClick={()=>onSelectCountry(country)}
             >
               <img
@@ -75,7 +75,7 @@ function CountrySidebar({onSelectCountry}:CountrySidebarProps) {
               <span className="text-sm text-foreground font-michroma group-hover:text-primary transition-colors truncate`">
                 {country.names.common}
               </span>
-              <div className="text-xs bg-orange-500 p-1.5 rounded-xl text-foreground font-michroma group-hover:text-primary transition-colors truncate ml-auto px-1">{country.codes.alpha_2}</div>
+              <div className="text-xs bg-amber-400/40 p-1.5 rounded-bl-lg rounded-tr-lg text-foreground font-michroma group-hover:text-primary transition-colors truncate mr-auto px-2 ">{country.codes.alpha_2}</div>
             
             </button>
           ))

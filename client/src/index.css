@@ -92,6 +92,23 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground m-0 p-0;
   }
+
+}
+
+
+.customScrollbar::-webkit-scrollbar{
+  width: 4px;
+  
+}
+.customScrollbar::-webkit-scrollbar-track{
+  background: transparent;
+}
+.customScrollbar::-webkit-scrollbar-thumb{
+  background: var(--color-orange-300);
+  border-radius: 99999px;
+}
+.customScrollbar::-webkit-scrollbar-thumb:hover{
+  background: var(--color-orange-400);
 }

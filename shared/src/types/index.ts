@@ -103,6 +103,13 @@ export type Country = {
     iso_status?: string;
   };
 
+  // Cars
+  cars: {
+    driving_side: string;
+  };
+
+  memberships?: Record<string, boolean>;
+
   // External Links
   links: {
     google_maps: string;
