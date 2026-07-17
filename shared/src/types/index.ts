@@ -65,7 +65,19 @@ export type Country = {
     url_png: string;
     url_svg: string;
     description: string;
-    
+    colors?: {
+      dominant: string;
+      prominent: string;
+      palette: { hex: string; proportion: number }[];
+      swatches: {
+        dark_muted: string | null;
+        dark_vibrant: string | null;
+        light_muted: string | null;
+        light_vibrant: string | null;
+        muted: string | null;
+        vibrant: string | null;
+      };
+    };
   };
 
   // Identity & Culture

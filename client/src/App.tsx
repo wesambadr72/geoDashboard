@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import type { Country } from 'shared'
 import Header from '@/lib/layout/Header'
 import CountrySidebar from '@/lib/layout/countrySidebar'
@@ -8,8 +8,53 @@ import Footer from '@/lib/layout/Footer'
 function App() {
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null)
 
+  // Dynamic theme styling based on the selected country's flag colors
+  const themeStyles = useMemo(() => {
+    if (!selectedCountry?.flag?.colors) return {};
+    
+    const colors = selectedCountry.flag.colors;
+    
+    // Select prominent/vibrant color as primary
+    const primary = colors.swatches.muted || colors.swatches.dark_muted || colors.prominent || colors.swatches?.dark_vibrant || colors.swatches?.vibrant;
+    
+    // Choose light/muted options for background and card to maintain clean layout legibility
+    const bg = `${colors.dominant}40` || `${colors.swatches?.light_muted}40`;
+    const card = colors.swatches?.light_muted 
+      ? `${colors.swatches.light_muted}50` 
+      : `${colors.dominant}18`;
+      
+    const border = colors.swatches?.muted 
+      ? `${colors.swatches.muted}80` 
+      : `${primary}35`;
+      
+    const foreground = colors.swatches?.dark_muted || primary || '#1a1a1a';
+    
+    return {
+      '--color-background': bg,
+      '--color-foreground': foreground,
+      '--color-card': card,
+      '--color-primary': primary,
+      '--color-border': border,
+      // Map back to the custom Tailwind orange theme variables for full backward compatibility
+      '--color-orange-50': bg,
+      '--color-orange-100': card,
+      '--color-orange-200': border,
+      '--color-orange-300': border,
+      '--color-orange-700': foreground,
+      '--color-orange-900': primary,
+    } as React.CSSProperties;
+  }, [selectedCountry]);
+
   return (
-    <div className="min-h-screen bg-background text-foreground font-tajawal flex flex-col justify-between">
+    <div 
+      style={themeStyles} 
+      className="min-h-screen bg-background text-foreground font-tajawal flex flex-col justify-between transition-colors duration-500 ease-in-out relative overflow-hidden"
+    >
+      {/* Full-screen Shine Sweep Transition Effect */}
+      <div key={selectedCountry?.codes?.alpha_2 || 'default'} className="shine-overlay">
+        <div className="shine-sweep" />
+      </div>
+
       <div>
         <Header />
         
