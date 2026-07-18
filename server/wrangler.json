@@ -1,0 +1,14 @@
+{
+  "name": "geodashboard-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-18",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "GEO_CACHE",
+      "id": "19952bb8a2cd4de390a065063ac66648"
+    }
+  ]
+}
